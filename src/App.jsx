@@ -1,35 +1,75 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+export const App = () => {
 
+  const [studyTitle, setStudiyTitle] = useState('')
+  const [studyTime, setStudiyTime] = useState(0)
+  const [records, setRecords] = useState([])
+  const [error, setError] = useState('');
+  const [totalTIme, setTotalTIme] = useState(0);
+
+  const onChangeTitle = (e) => {
+    setStudiyTitle(e.target.value)
+  }
+  const onChangeTime = (e) => {
+    setStudiyTime(e.target.value)
+  }
+  const onClickAdd = (e) => {
+    if(studyTitle === "" || studyTime === 0) {
+      setError('入力されていない項目があるよ！')
+      return
+    }
+    const newRecord = [...records, {title: studyTitle, time:studyTime}]
+    setRecords(newRecord);
+    setStudiyTitle('')
+    setStudiyTime(0)
+    
+    const t = newRecord.reduce((acc,num) => {
+      return { time: parseInt(acc.time) + parseInt(num.time) }
+    })
+
+    setTotalTIme(t.time)
+
+  }
+  
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+    <h1 className="title">学習記録一覧</h1>
+    <div className="form">
+      <p>
+      <label htmlFor="">
+        学習内容：
+        <input type="text" value={studyTitle} onChange={onChangeTitle} />
+      </label>
       </p>
+      <p>
+      <label htmlFor="">
+        学習時間：
+        <input type="number"  value={studyTime} onChange={onChangeTime} />
+      </label>
+      </p>
+      
+      <p>入力されている学習内容：<span>{studyTitle}</span></p>
+      <p>入力されている学習時間：<span>{studyTime}時間</span></p>
+      <button onClick={onClickAdd}>登録</button>
+    </div>
+
+    <div className="term_list">
+      {records.map( (record, index)  => {
+        return (
+          <dl key={index} className="list">
+            <dt>◆ {record.title}：</dt>
+            <dd>{`${ record.time }時間`}</dd>
+          </dl>
+        )
+      })}
+    </div>
+    <p>合計時間：<span>{totalTIme} / 1000(h)</span></p>
+    {error === "" ||  (
+      <p>{error}</p>
+    )}
+    
     </>
   )
 }
-
-export default App
