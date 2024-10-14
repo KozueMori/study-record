@@ -62,7 +62,7 @@ export const App = () => {
   
   return (
     <>
-    <h1 className="title">学習記録一覧</h1>
+    <h1 className="title">学習記録一覧だよ</h1>
     <div className="form">
       <p>
       <label htmlFor="">
@@ -107,3 +107,4 @@ export const App = () => {
     </>
   )
 }
+
