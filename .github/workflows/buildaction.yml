@@ -1,11 +1,11 @@
 name: BuildAction  # このworkflowの名前
-description: "pushしたらビルドする" # このworkflowの説明
+description: "pushしたらビルドする、そしてデプロイ" # このworkflowの説明
 
 on: push
 
 jobs: # jobsで実行する内容を書く
   build: # 実行する内容(job)の名前
-  name: build
+    name: build
     runs-on: ubuntu-latest # 実行するOS
     steps:
       # リポジトリをチェックアウトする
