@@ -1,10 +1,9 @@
-name: Hello World
+name: Hello World  # このworkflowの名前
 
-on: 
-  workflow_dispatch:
+on: push
 
-jobs:
-  say_hello:
-    runs-on: ubuntu-latest
+jobs: # jobsで実行する内容を書く
+  say_hello: # 実行する内容(job)の名前
+    runs-on: ubuntu-latest # 実行するOS
     steps:
-      - run: echo "Hello World!"
+      - run: echo "Hello World!" # 実行するコマンド
