@@ -1,11 +1,6 @@
 name: BuildAction  # このworkflowの名前
 description: "pushしたらビルドする" # このworkflowの説明
 
-runs: # このworkflowが実行されるタイミング
-  using:'node21.1.0'
-  main: 'dist/index.js' # Actionのメインファイル。このファイルは後で自動生成させるのでこのままで大丈夫。
-
-
 on: push
 
 jobs: # jobsで実行する内容を書く
